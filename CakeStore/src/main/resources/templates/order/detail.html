@@ -1,0 +1,105 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic (~{::main})}">
+    <main th:object="${order}">
+		<!-- Breadcrumb Begin -->
+		<div class="breadcrumb-option">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="breadcrumb__text">
+							<h2>Order Detail</h2>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="breadcrumb__links">
+							<a href="./index.html">Home</a>
+							<span>Order Detail</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
+
+		<!-- Shopping Cart Section Begin -->
+		<section class="shopping-cart spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="shopping__cart__table">
+							<table>
+								<thead>
+								<tr>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th>Total</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="detail: *{orderDetails}" th:object="${detail}">
+									<td class="product__cart__item">
+										<div class="product__cart__item__text">
+											<h6>[[*{product.name}]]</h6>
+											<h5>$[[*{#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}]]</h5>
+										</div>
+									</td>
+									<td class="quantity__item">
+										<div class="quantity">
+											<div class="pro-qty">
+												[[*{quantity}]]
+											</div>
+										</div>
+									</td>
+									<td class="cart__price">$[[*{#numbers.formatDecimal(price*quantity, 0, 'COMMA', 2, 'POINT')}]]</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="continue__btn">
+									<a href="#">Continue Shopping</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="cart__discount">
+							<h6>Discount codes</h6>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="checkout__input">
+										<p>Order Number</p>
+										<input th:field="*{id}" readonly >
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="checkout__input">
+										<p>Purchaser:</p>
+										<input th:field="*{account.username}" readonly >
+									</div>
+								</div>
+							</div>
+							<div class="checkout__input">
+								<p>Purchased Date:</p>
+								<input th:field="*{createDate}" readonly>
+							</div>
+							<div class="checkout__input">
+								<p>Country:</p>
+								<input th:field="*{address}" readonly>
+							</div>
+						</div>
+						<div class="cart__total">
+							<h6>Cart total</h6>
+							<ul>
+								<li>Subtotal <span></span></li>
+								<li>Total <span></span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Shopping Cart Section End -->
+    </main>
+</div>

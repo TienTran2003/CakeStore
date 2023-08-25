@@ -1,0 +1,10 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<div class="header__top__right__links">
+		<a href="#" class="search-switch"><img th:src="@{/user/img/icon/search.png}" alt=""></a>
+		<a href="#"><img th:src="@{/user/img/icon/heart.png}" alt=""></a>
+	</div>
+	<div class="header__top__right__cart">
+		<a th:href="@{/cart/view}"><img th:src="@{/user/img/icon/cart.png}" alt=""> <span>{{cart.count}}</span></a>
+		<div class="cart__price">Cart: <span>${{cart.amount|number:2}}</span></div>
+	</div>
+</div>
