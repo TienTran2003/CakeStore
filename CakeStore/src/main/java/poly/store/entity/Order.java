@@ -32,6 +32,7 @@ public class Order  implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
 	Date createDate = new Date();
+	Integer status = 0;
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	Account account;
@@ -39,4 +40,18 @@ public class Order  implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
+
+	public Double calculateTotal() {
+		if (orderDetails == null || orderDetails.isEmpty()) {
+			return 0.0; // Return 0 if there are no order details
+		}
+
+		// Sum up the total value of each order detail
+		return orderDetails.stream()
+				.mapToDouble(orderDetail -> orderDetail.getProduct().getPrice() * orderDetail.getQuantity())
+				.sum();
+	}
+
+
+
 }

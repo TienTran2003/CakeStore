@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import poly.store.entity.Product;
 import poly.store.service.ProductService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller

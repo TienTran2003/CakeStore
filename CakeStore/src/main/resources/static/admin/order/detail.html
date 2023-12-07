@@ -1,0 +1,90 @@
+<div class="panel panel-default" ng-if="orders">
+    <div class="col-xl-6 col-md-12">
+        <div class="card table-card">
+            <div class="card-header">
+                <h5>Information Order</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover m-b-0 without-header">
+                        <tbody>
+                        <tr ng-repeat="orderdetail in orderDetails">
+                            <td>
+                                <div class="d-inline-block align-middle">
+                                    <div class="d-inline-block">
+                                        <h6>{{orderdetail.product.name}}</h6>
+                                        <p class="text-muted m-b-0">{{orderdetail.product.price}} , {{orderdetail.quantity}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <h6 class="f-w-700">${{orderdetail.product.price * orderdetail.quantity}}<i class="fas fa-level-down-alt text-c-red m-l-10"></i></h6>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-md-12">
+                <!-- Basic Form Inputs card start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Customer information</h5>
+                    </div>
+                    <div class="card-block">
+                        <form>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Order ID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" value="{{order.id}}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Create Date</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="order.createDate" type="text" class="form-control" value="{{order.createDate | date : 'dd-MM-yyyy'}}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Customer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" value="{{order.account.fullname}}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Phone number</label>
+                                <div class="col-sm-10">
+                                    <input  type="text" class="form-control" value="{{order.account.phone}}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Address</label>
+                                <div class="col-sm-10">
+                                    <textarea ng-model="order.address" class="form-control" readonly>{{order.address}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10">
+                                    <select id="status" ng-model="order.status" ng-change="update()" >
+                                        <option value="0" ng-selected="order.status == 0">Đặt hàng</option>
+                                        <option value="1" ng-selected="order.status == 1">Đã giao cho DVVC</option>
+                                        <option value="2" ng-selected="order.status == 2">Đang giao</option>
+                                        <option value="3" ng-selected="order.status == 3">Đã giao</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Basic Form Inputs card end -->
+    </div>
+</div>

@@ -3,15 +3,15 @@ package poly.store.rest.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import poly.store.entity.Account;
+import poly.store.entity.Product;
 import poly.store.service.AccountService;
 
 @CrossOrigin("*")
@@ -20,6 +20,11 @@ import poly.store.service.AccountService;
 public class AccountRestController {
 	@Autowired
 	AccountService accountService;
+
+	@GetMapping("/list")
+	public List<Account> getAllAccount(){
+		return accountService.findAll();
+	}
 	
 	@GetMapping
 	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin) {
@@ -32,5 +37,17 @@ public class AccountRestController {
 	@GetMapping("{username}")
 	public Account getOne(@PathVariable("username") String username) {
 		return accountService.findById(username);
+	}
+
+	@DeleteMapping("/{username}")
+	public void delete(@PathVariable("username") String username) {
+		accountService.delete(username);
+	}
+
+	@GetMapping("/total")
+	public int getTotal() {
+		List<Account> accounts = accountService.findAll();
+		int total = accounts.size();
+		return total;
 	}
 }

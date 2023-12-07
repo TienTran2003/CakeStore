@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poly.store.entity.Order;
 import poly.store.entity.Product;
 import poly.store.service.ProductService;
 
@@ -43,5 +44,12 @@ public class ProductRestController {
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		productService.delete(id);
+	}
+
+	@GetMapping("/total")
+	public int getTotal() {
+		List<Product> product = productService.findAll();
+		int total = product.size();
+		return total;
 	}
 }

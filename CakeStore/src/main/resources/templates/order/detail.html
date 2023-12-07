@@ -45,7 +45,7 @@
 									</td>
 									<td class="quantity__item">
 										<div class="quantity">
-											<div class="pro-qty">
+											<div >
 												[[*{quantity}]]
 											</div>
 										</div>
@@ -85,17 +85,17 @@
 								<input th:field="*{createDate}" readonly>
 							</div>
 							<div class="checkout__input">
-								<p>Country:</p>
+								<p>Address:</p>
 								<input th:field="*{address}" readonly>
 							</div>
 						</div>
-						<div class="cart__total">
-							<h6>Cart total</h6>
-							<ul>
-								<li>Subtotal <span></span></li>
-								<li>Total <span></span></li>
-							</ul>
-						</div>
+<!--						<div class="cart__total">-->
+<!--							<h6>Cart total</h6>-->
+<!--							<ul>-->
+<!--								<li>Subtotal <span></span></li>-->
+<!--								<li>Total <span th:text="${#numbers.formatDecimal(calculateTotalPrice(), 0, 'COMMA', 2, 'POINT')}"></span></li>-->
+<!--							</ul>-->
+<!--						</div>-->
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,45 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic (~{::main})}">
+    <main>
+        <section>
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-80">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 10px; margin-top: 30px; margin-bottom: 30px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                                    <form action="/account/create" method="post">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div>Username:</div>
+                                                    <input name="username" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Password:</div>
+                                                    <input name="password" type="password" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>FullName:</div>
+                                                    <input name="fullname" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Email:</div>
+                                                    <input name="email" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="panel-footer text-right">
+                                                <button class="btn btn-success">Register</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

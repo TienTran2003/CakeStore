@@ -45,4 +45,20 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findByUsername(String username) {
 		return dao.findByUsername(username);
 	}
+
+	@Override
+	public Object delete(Long id) {
+		dao.deleteById(id);
+        return null;
+    }
+
+	@Override
+	public Order update(Order order) {
+		return dao.save(order);
+	}
+
+	public List<Order> findAll(){
+		return dao.findAll();
+	}
+
 }

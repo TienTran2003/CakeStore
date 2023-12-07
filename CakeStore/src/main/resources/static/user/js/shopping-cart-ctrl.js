@@ -1,4 +1,6 @@
+
 app.controller("cart-ctrl", function ($scope, $http) {
+
     // quản lý giỏ hàng
     var $cart = $scope.cart = {
         items: [],
@@ -56,9 +58,8 @@ app.controller("cart-ctrl", function ($scope, $http) {
         loadFromLocalStorage() { // đọc giỏ hàng từ local storage
             var json = localStorage.getItem("cart");
             this.items = json ? JSON.parse(json) : [];
-        }
+        },
     }
-
     $cart.loadFromLocalStorage();
 
     // Đặt hàng
@@ -82,13 +83,28 @@ app.controller("cart-ctrl", function ($scope, $http) {
             // Thực hiện đặt hàng
             $http.post("/rest/orders", order).then(resp => {
 				console.log("dat hang thanh cong")
-                alert("Đặt hàng thành công!");
+                alert("Order successful");
                 $cart.clear();
                 location.href = "/order/detail/" + resp.data.id;
             }).catch(error => {
-                alert("Đặt hàng lỗi!")
+                alert("Fail order!!!")
                 console.log(error)
             })
         }
     }
+    $scope.delete = function (order) {
+        if (confirm("Bạn muốn xóa đơn hàng này?")) {
+            $http.delete(`/rest/orders/${order}`).then(function (resp) {
+                // Handle success response
+                var index = $scope.orders.findIndex(function (o) { return o.id == order.id; });
+                $scope.orders.splice(index, 1);
+                alert("Xóa đơn hàng thành công!");
+            }).catch(function (error) {
+                // Handle error response
+                alert("Lỗi xóa đơn hàng!");
+                console.log("Error", error);
+            });
+        }
+    }
+
 })

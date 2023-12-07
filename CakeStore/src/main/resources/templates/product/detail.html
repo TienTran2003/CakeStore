@@ -28,7 +28,7 @@
 					<div class="col-lg-6">
 						<div class="product__details__img">
 							<div class="product__details__big__img">
-								<img class="big_img" th:src="@{|/user/img/shop/*{image}|}">
+								<img class="big_img" th:src="@{|/user/img/*{image}|}">
 							</div>
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 							<div class="product__details__option">
 								<div class="quantity">
 									<div class="pro-qty">
-										<input type="text" value="2">
+										<input type="text" value="1">
 									</div>
 								</div>
 								<a th:attr="ng-click=@{|cart.add(${id})|}" class="primary-btn">Add to cart</a>
@@ -122,7 +122,7 @@
 							<div class="product__item">
 								<div class="product__item__pic set-bg">
 									<a th:href="@{|/product/detail/${p.id}|}">
-										<img th:src="@{|/user/img/shop/${p.image}|}">
+										<img th:src="@{|/user/img/${p.image}|}">
 									</a>
 									<div class="product__label">
 										<span>Cupcake</span>

@@ -1,0 +1,50 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic (~{::main})}">
+    <main th:object="${item}">
+        <section>
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-80">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 10px; margin-top: 30px; margin-bottom: 30px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Information</h2>
+
+                                    <form action="/account/update" method="put">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div>UserName:</div>
+                                                    <input name="username" type="text" class="form-control" th:value="*{username}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Full Name:</div>
+                                                    <input name="fullname" type="text" class="form-control" th:value="*{fullname}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Phone:</div>
+                                                    <input name="phone" type="text" class="form-control" th:value="*{phone}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Email:</div>
+                                                    <input name="email" type="text" class="form-control" th:value="*{email}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>Address:</div>
+                                                    <input name="address" type="text" class="form-control" th:value="*{address}">
+                                                </div>
+                                            </div>
+                                            <div class="panel-footer text-right">
+                                                <button class="btn btn-success">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <a th:href="@{/account/change-password/form}">Change Password</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

@@ -32,4 +32,11 @@ public class OrderController {
 		model.addAttribute("orders", orderService.findByUsername(username));
 		return "order/list";
 	}
+
+	@RequestMapping("/order/delete/{id}")
+	public String delete(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("order", orderService.delete(id));
+		return "redirect:/order/list";
+	}
+
 }

@@ -42,24 +42,26 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(username -> {
 			try {
 				Account user = accountService.findById(username);
-				String password = pe.encode(user.getPassword());
 				String[] roles = user.getAuthorities().stream()
 						.map(er -> er.getRole().getId())
 						.collect(Collectors.toList())
 						.toArray(new String[0]);
-				
 				Map<String, Object> authentication = new HashMap<>();
 				authentication.put("user", user);
 				byte[] token = (username + ":" + user.getPassword()).getBytes();
 				authentication.put("token", "Basic " + Base64.getEncoder().encodeToString(token));
 				session.setAttribute("authentication", authentication);
-				
-				return User.withUsername(username).password(password).roles(roles).build();
+
+				return User.withUsername(username)
+						.password(user.getPassword()) // Use the stored encoded password
+						.roles(roles)
+						.build();
 			} catch (NoSuchElementException e) {
 				throw new UsernameNotFoundException(username + " not found!");
 			}
 		});
 	}
+
 	
 	// Phân quyền sử dụng
 	@Override

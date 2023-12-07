@@ -15,6 +15,12 @@ public class SecurityController {
 		model.addAttribute("message", "Vui lòng đăng nhập!");
 		return "security/login";
 	}
+
+	@RequestMapping("/security/register/form")
+	public String registerForm(Model model) {
+		model.addAttribute("message", "Vui lòng đăng kí!");
+		return "security/register";
+	}
 	
 	@RequestMapping("/security/login/success")
 	public String loginSuccess(Model model) {

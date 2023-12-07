@@ -33,18 +33,26 @@
 									<th>Order No</th>
 									<th>Order Date</th>
 									<th>Shipping Address</th>
+									<th>Status</th>
+									<th></th>
 									<th></th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr th:each="order, state: ${orders}">
-									<td class="product__cart__item">
-										<h6>[[${state.index}]]</h6>
+									<td class="cart__price">
+										<h6>[[${state.index + 1}]]</h6>
 									</td>
 									<td class="cart__price">[[${order.id}]]</td>
 									<td class="cart__stock">[[${order.createDate}]]</td>
-									<td class="cart__stock">[[${order.address}]]</td>
-									<td class="cart__close"><a class="icon_search" th:href="@{|/order/detail/${order.id}|}" ></a></td>
+									<td class="product__cart__item">[[${order.address}]]</td>
+									<td class="cart__stock" th:text="${order.status == 0 ? 'Đặt hàng' : (order.status == 1 ? 'Đã giao cho DVVC' : (order.status == 2 ? 'Đang giaO' : 'Đã giao'))}"></td>
+									<td class="cart__close">
+										<a class="icon_search" th:href="@{|/order/detail/${order.id}|}" ></a>
+									</td>
+									<td th:if="${order.status == 0}">
+										<a class="glyphicon glyphicon-trash" th:href="@{|/order/delete/${order.id}|}"></a>
+									</td>
 								</tr>
 								</tbody>
 							</table>
