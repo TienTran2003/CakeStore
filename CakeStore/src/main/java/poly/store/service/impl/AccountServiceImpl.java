@@ -58,6 +58,8 @@ public class AccountServiceImpl implements AccountService{
 			accounts.setPassword(password.encode(account.getPassword()));
 			accounts.setEmail(account.getEmail());
 			accounts.setFullname(account.getFullname());
+			accounts.setPhone(account.getPhone());
+			accounts.setAddress(account.getAddress());
 			return dao.save(accounts);
 		}
 	}

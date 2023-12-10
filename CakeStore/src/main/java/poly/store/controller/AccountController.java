@@ -15,6 +15,7 @@ import poly.store.entity.Account;
 import poly.store.entity.Product;
 import poly.store.service.AccountService;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -24,21 +25,34 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @RequestMapping("/account/create")
-    public ResponseEntity<Account> createAccount(
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam String fullname,
-            @RequestParam String email) throws NotFoundException {
-        // Create an Account object from the form data and proceed with account creation
-        Account account = new Account(username, password, fullname, email);
-        Account createdAccount = accountService.create(account);
+//    @RequestMapping("/account/create")
+//    public ResponseEntity<Account> createAccount(
+//            @RequestParam String username,
+//            @RequestParam String password,
+//            @RequestParam String fullname,
+//            @RequestParam String email,
+//            @RequestParam String phone,
+//            @RequestParam String address) throws NotFoundException {
+//        // Create an Account object from the form data and proceed with account creation
+//        Account account = new Account(username, password, fullname, email, phone, address);
+//        Account createdAccount = accountService.create(account);
+//
+//        // Redirect to the login form
+//        return ResponseEntity.status(HttpStatus.SEE_OTHER)
+//                .header(HttpHeaders.LOCATION, "/security/login/form")
+//                .body(createdAccount);
+//    }
+@RequestMapping("/account/create")
+public ResponseEntity<Account> createAccount(Account accounts,
+        Model model) throws NotFoundException {
+    // If there are no validation errors, proceed with account creation
+    Account createdAccount = accountService.create(accounts);
 
-        // Redirect to the login form
-        return ResponseEntity.status(HttpStatus.SEE_OTHER)
-                .header(HttpHeaders.LOCATION, "/security/login/form")
-                .body(createdAccount);
-    }
+    // Redirect to the login form
+    return ResponseEntity.status(HttpStatus.SEE_OTHER)
+            .header(HttpHeaders.LOCATION, "/security/login/form")
+            .body(createdAccount);
+}
 
     @RequestMapping("/account/detail/{username}")
     public String detail(Model model, @PathVariable("username") String username) {
@@ -48,17 +62,16 @@ public class AccountController {
     }
 
     @RequestMapping("account/update")
-    public String updateAccount(
-            @RequestParam String username,
+    public String updateAccount(Principal p,
             @RequestParam String email,
             @RequestParam String fullname,
             @RequestParam String phone,
             @RequestParam String address,
             RedirectAttributes redirectAttributes) throws NotFoundException {
-        Account existingAccount = accountService.findById(username);
+        Account existingAccount = accountService.findById(p.getName());
 
         if (existingAccount == null) {
-            throw new NotFoundException("Account not found with username: " + username);
+            throw new NotFoundException("Account not found with username: " + p.getName());
         }
         existingAccount.setEmail(email);
         existingAccount.setFullname(fullname);
@@ -66,7 +79,7 @@ public class AccountController {
         existingAccount.setAddress(address);
         accountService.update(existingAccount);
         redirectAttributes.addFlashAttribute("message", "Account information updated successfully");
-        return "redirect:/account/detail/"+username;
+        return "redirect:/account/detail/"+p.getName();
     }
 
     @RequestMapping("account/change-password/form")

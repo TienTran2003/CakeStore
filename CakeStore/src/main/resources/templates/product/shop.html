@@ -27,14 +27,8 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
                             <div class="shop__option__search">
-                                <form action="#">
-                                    <select>
-                                        <option value="">Categories</option>
-                                        <option value="">Red Velvet</option>
-                                        <option value="">Cup Cake</option>
-                                        <option value="">Biscuit</option>
-                                    </select>
-                                    <input type="text" placeholder="Search">
+                                <form action="/search" method="post">
+                                    <input type="text" placeholder="Search" name="keywords">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
@@ -54,7 +48,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div th:each="p: ${items}" class="col-lg-3 col-md-6 col-sm-6">
+                    <div th:each="p: ${page}" class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg">
                                 <a th:href="@{|/product/detail/${p.id}|}">
@@ -78,15 +72,18 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><span class="arrow_carrot-right"></span></a>
+                                <div class="shop__pagination">
+                                    <a th:href="@{/product/list(p=0)}"><<</a>
+                                    <span th:if="${page.number != 0}"><a th:href="@{/product/list(p=${page.number - 1})}"><</a></span>
+                                    <span th:if="${totalPages - 1 > page.number}"><a th:href="@{/product/list(p=${page.number + 1})}">></a></span>
+<!--                                    <a th:href="@{/product/list(p=${page.number + 1})}">></a>-->
+                                    <a th:href="@{/product/list(p=${totalPages - 1})}">>></a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__last__text">
-                                <p>Showing 1-9 of 10 results</p>
+                                <p th:text="${page.number * page.size + 1 + ' - ' + (page.number * page.size + page.numberOfElements ) + ' of ' + page.totalElements} + ' product'"></p>
                             </div>
                         </div>
                     </div>

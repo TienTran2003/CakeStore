@@ -126,7 +126,7 @@
 		<section class="product spad">
 			<div class="container">
 				<div class="row">
-					<div th:each="p: ${items}" class="col-lg-3 col-md-6 col-sm-6">
+					<div th:each="p: ${page}" class="col-lg-3 col-md-6 col-sm-6">
 						<div class="product__item">
 							<div class="product__item__pic set-bg">
 								<a th:href="@{|/product/detail/${p.id}|}">

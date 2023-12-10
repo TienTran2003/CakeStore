@@ -20,16 +20,12 @@ public class UploadServiceImpl implements UploadService {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-
 		// Keep the original filename without any modification
 		String originalFilename = file.getOriginalFilename();
-
 		// Create a unique name using the current timestamp and the original filename
-
 		try {
 			File savedFile = new File(dir, originalFilename);
 			file.transferTo(savedFile);
-			System.out.println(savedFile.getAbsolutePath());
 			return savedFile;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

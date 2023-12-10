@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
+
 @Controller
 public class SecurityController {
 	@RequestMapping("/security/login/form")
@@ -25,7 +27,7 @@ public class SecurityController {
 	@RequestMapping("/security/login/success")
 	public String loginSuccess(Model model) {
 		model.addAttribute("message", "Đăng nhập thành công!");
-		return "security/login";
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("/security/login/error")
