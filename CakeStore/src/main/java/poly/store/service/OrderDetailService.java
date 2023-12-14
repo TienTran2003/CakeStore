@@ -1,8 +1,11 @@
 package poly.store.service;
 
 import poly.store.entity.OrderDetail;
+import poly.store.entity.Product;
 
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface OrderDetailService {
@@ -12,4 +15,5 @@ public interface OrderDetailService {
 
     public OrderDetail findById(Long id) ;
 
+    List<Product> getTopPurchasedProducts(int topCount);
 }

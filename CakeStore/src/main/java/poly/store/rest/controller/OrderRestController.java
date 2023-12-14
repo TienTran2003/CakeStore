@@ -12,7 +12,9 @@ import poly.store.entity.Order;
 import poly.store.entity.Product;
 import poly.store.service.OrderService;
 
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -27,6 +29,10 @@ public class OrderRestController {
 		return orderService.findAll();
 	}
 
+	@GetMapping("/status")
+	public List<Order> getByStatus(){
+		return orderService.findByStatus();
+	}
 	
 	@PostMapping
 	public Order purchase(@RequestBody JsonNode orderData) {
@@ -55,5 +61,10 @@ public class OrderRestController {
 		return orderService.update(order);
 	}
 
+//	@GetMapping("/revenue-by-month")
+//	public ResponseEntity<Map<YearMonth, Double>> calculateRevenueByMonth() {
+//		Map<YearMonth, Double> revenueByMonth = orderService.calculateRevenueByMonth();
+//		return ResponseEntity.ok(revenueByMonth);
+//	}
 
 }

@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import poly.store.entity.Account;
 import poly.store.entity.Product;
 import poly.store.service.AccountService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -42,17 +44,35 @@ public class AccountController {
 //                .header(HttpHeaders.LOCATION, "/security/login/form")
 //                .body(createdAccount);
 //    }
-@RequestMapping("/account/create")
-public ResponseEntity<Account> createAccount(Account accounts,
-        Model model) throws NotFoundException {
-    // If there are no validation errors, proceed with account creation
-    Account createdAccount = accountService.create(accounts);
+//@RequestMapping("/account/create")
+//public ResponseEntity<Account> createAccount(Account accounts,
+//        Model model) throws NotFoundException {
+//    // If there are no validation errors, proceed with account creation
+//    Account createdAccount = accountService.create(accounts);
+//
+//    // Redirect to the login form
+//    return ResponseEntity.status(HttpStatus.SEE_OTHER)
+//            .header(HttpHeaders.LOCATION, "/security/login/form")
+//            .body(createdAccount);
+//}
 
-    // Redirect to the login form
-    return ResponseEntity.status(HttpStatus.SEE_OTHER)
-            .header(HttpHeaders.LOCATION, "/security/login/form")
-            .body(createdAccount);
-}
+    @RequestMapping("/account/create")
+    public String createAccount(@Valid Account account, BindingResult result, Model model) throws NotFoundException {
+        // Check for validation errors
+        if (result.hasErrors()) {
+            // Add errors to the model
+            model.addAttribute("errors", result.getAllErrors());
+
+            // Return register page with errors
+            return "/security/register"; // Replace with your actual register page name
+        }
+
+        // If there are no errors, proceed with account creation
+        Account createdAccount = accountService.create(account);
+
+        // Redirect to the login form
+        return "redirect:/security/login/form";
+    }
 
     @RequestMapping("/account/detail/{username}")
     public String detail(Model model, @PathVariable("username") String username) {

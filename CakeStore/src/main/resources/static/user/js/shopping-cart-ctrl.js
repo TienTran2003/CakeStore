@@ -18,7 +18,7 @@ app.controller("cart-ctrl", function ($scope, $http) {
             }
         },
         remove(id) { // xóa sản phẩm khỏi giỏ hàng
-            var index = this.items.findIndex(item => item.id == id);
+            var index = this.items.findIndex(item => item.id === id);
             this.items.splice(index, 1);
             this.saveToLocalStorage();
         },

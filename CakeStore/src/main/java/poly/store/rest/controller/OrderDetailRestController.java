@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poly.store.entity.OrderDetail;
+import poly.store.entity.Product;
 import poly.store.service.OrderDetailService;
 
 import java.util.List;
@@ -26,4 +27,8 @@ public class OrderDetailRestController {
         return order.getOrderDetailsByOrderId(orderId);
     }
 
+    @GetMapping("/top")
+    public List<Product> getProductTop() {
+        return order.getTopPurchasedProducts(10);
+    }
 }

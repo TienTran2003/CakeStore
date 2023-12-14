@@ -1,5 +1,12 @@
 <div class="panel panel-default" ng-if="items">
 	<div class="panel-heading">PRODUCT LIST</div>
+	<div class="dropdown-primary dropdown open" style="float: right;">
+		<button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+		<div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 44px, 0px); top: 0px; left: 0px; will-change: transform;">
+			<a class="dropdown-item waves-light waves-effect" ng-click="getAllProduct()">All Order</a>
+			<a class="dropdown-item waves-light waves-effect" ng-click="topProduct()">Top Product</a>
+		</div>
+	</div>
 	<table class="table table-condensed">
 		<thead class="bg-success" style="font-variant: small-caps;">
 		<tr>

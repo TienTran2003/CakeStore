@@ -16,6 +16,18 @@ app.controller('order-ctrl', function ($scope, $http) {
 
     }
 
+    $scope.showNewOrder = function () {
+        $http.get("/rest/orders/status").then(function (resp) {
+            $scope.orders = resp.data;
+        });
+    };
+
+    // $scope.search = function() {
+    //     $http.get("/rest/orders").then(function (resp) {
+    //         $scope.orders = resp.data;
+    //     });
+    // }
+
     $scope.loadOrderss = function () {
         $http.get("/rest/orders").then(function (resp) {
             $scope.orders = resp.data;

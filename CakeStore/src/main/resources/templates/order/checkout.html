@@ -61,7 +61,7 @@
                                         <li>Subtotal <span>${{cart.amount | number : 2}}</span></li>
                                         <li>Total <span>${{cart.amount | number : 2}}</span></li>
                                     </ul>
-                                    <button ng-click="order.purchase()" type="submit" class="site-btn">PLACE ORDER</button>
+                                    <button ng-click="order.purchase(); $event.preventDefault()" type="submit" class="site-btn">PLACE ORDER</button>
                                 </div>
                             </div>
                         </div>

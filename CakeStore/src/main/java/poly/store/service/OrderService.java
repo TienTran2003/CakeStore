@@ -1,6 +1,8 @@
 package poly.store.service;
 
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -18,4 +20,7 @@ public interface OrderService {
 	Object delete(Long id);
 
 	Order update(Order order);
+
+	public List<Order> findByStatus();
+
 }

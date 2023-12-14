@@ -1,15 +1,21 @@
 package poly.store.service.impl;
 
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import poly.store.dao.OrderDAO;
 import poly.store.dao.OrderDetailDAO;
 import poly.store.entity.Order;
@@ -61,4 +67,11 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findAll();
 	}
 
+	@Override
+	public List<Order> findByStatus() {
+		return dao.findByStatus();
+	}
+
+
+	
 }

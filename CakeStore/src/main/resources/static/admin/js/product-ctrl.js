@@ -12,6 +12,24 @@ app.controller("product-ctrl", function($scope, $http){
 		});
 		$scope.reset();
 	}
+
+	$scope.getAllProduct = function(){
+		$http.get("/rest/products").then(resp => {
+			$scope.items = resp.data;
+			$scope.items.forEach(item => {
+				item.createDate = new Date(item.createDate)
+			})
+		})
+	}
+
+	$scope.topProduct = function(){
+		$http.get("/rest/order_detail/top").then(resp => {
+			$scope.items = resp.data;
+			$scope.items.forEach(item => {
+				item.createDate = new Date(item.createDate)
+			})
+		})
+	}
 	
 	$scope.reset = function(){
 		$scope.form = {
